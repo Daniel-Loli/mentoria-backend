@@ -94,9 +94,9 @@ public class AsignacionServiceImpl
         if (MisionOpt.isEmpty()) {
             return new ObjectResponse<>(404, Modulo.MISION.noEncontrado(), null);
         }
-        Mision Mision = MisionOpt.get();
-        if(Mision.getEstado() != EstadoMisionEnum.CONVOCATORIA){
-            return new ObjectResponse<>(400, "Solicitud rechazada, El Mision no esta en estado de FORMACION", null);
+        Mision mision = MisionOpt.get();
+        if(mision.getEstado() != EstadoMisionEnum.CONVOCATORIA){
+            return new ObjectResponse<>(400, "Solicitud rechazada, El Mision no esta en estado de CONVOCATORIA", null);
         }
 
         Optional<AlumnoInstitucion> alumnoInstitucionOpt = alumnoInstitucionRepo.buscarPorId(request.getIdAlumnoInstitucion());
@@ -108,6 +108,10 @@ public class AsignacionServiceImpl
                 .listarSegunMisionYAlumnoInstitucion(request.getIdMision(), request.getIdAlumnoInstitucion());
         if (!asignacionesExistentes.isEmpty()) {
             return new ObjectResponse<>(400, "Solicitud rechazada, El alumno ya está asignado a este Mision", null);
+        }
+        Institucion institucion = mision.getInstitucion();
+        if(!institucion.equals(alumnoInstitucionOpt.get().getInstitucion())){
+            return new ObjectResponse<>(400, "Solicitud rechazada, El alumno no pertenece a esta Institucion", null);
         }
 
         Asignacion asignacion = Asignacion.builder()

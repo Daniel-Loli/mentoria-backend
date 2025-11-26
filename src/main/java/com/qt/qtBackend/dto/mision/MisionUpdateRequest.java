@@ -27,4 +27,6 @@ public class MisionUpdateRequest {
 
     private ZonedDateTime fechaFin;
 
+    private Long idDocenteInstitucion;
+
 }

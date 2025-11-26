@@ -47,6 +47,11 @@ public class Mision {
             foreignKey = @ForeignKey(name = "FK_MISION_INSTITUCION"),nullable = false)
     private Institucion institucion;
 
+    @ManyToOne
+    @JoinColumn(name = "id_docente_institucion",
+            foreignKey = @ForeignKey(name = "FK_MISION_DI"))
+    private DocenteInstitucion docenteInstitucion;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private ZonedDateTime createdAt;

@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
 public class JwtTokenUtil {
 
     // Tiempo de validez del token: 5 horas (en milisegundos)
-    private final long JWT_TOKEN_VALIDITY = 24 * 60 * 60 * 1000;
+    private static final long JWT_TOKEN_VALIDITY = 90L * 24 * 60 * 60 * 1000; // 3 meses
+
 
     // Se obtiene la clave secreta desde application.properties
     @Value("${jwt.secret}")

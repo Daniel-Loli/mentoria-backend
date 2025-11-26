@@ -10,15 +10,9 @@ import com.qt.qtBackend.dto.base.ObjectResponse;
 import com.qt.qtBackend.dto.matricula.MatriculaArbolResponse;
 import com.qt.qtBackend.dto.mision.*;
 import com.qt.qtBackend.mapper.IMapperService;
-import com.qt.qtBackend.model.AlumnoInstitucion;
-import com.qt.qtBackend.model.Institucion;
-import com.qt.qtBackend.model.Matricula;
-import com.qt.qtBackend.model.Mision;
+import com.qt.qtBackend.model.*;
 import com.qt.qtBackend.repository.base.IGenericRepo;
-import com.qt.qtBackend.repository.interfaces.IAlumnoInstitucionRepo;
-import com.qt.qtBackend.repository.interfaces.IInstitucionRepo;
-import com.qt.qtBackend.repository.interfaces.IMatriculaRepo;
-import com.qt.qtBackend.repository.interfaces.IMisionRepo;
+import com.qt.qtBackend.repository.interfaces.*;
 import com.qt.qtBackend.service.base.CRUDImpl;
 import com.qt.qtBackend.service.interfaces.IMatriculaService;
 import com.qt.qtBackend.service.interfaces.IMisionService;
@@ -38,6 +32,7 @@ public class MisionServiceImpl
         implements IMisionService {
 
     private final IMisionRepo misionRepo;
+    private final IDocenteInstitucionRepo docenteInstitucionRepo;
     private final IInstitucionRepo institucionRepo;
     private final IMatriculaRepo matriculaRepo;
     private final IMatriculaService matriculaService;
@@ -174,7 +169,6 @@ public class MisionServiceImpl
         if (misionOpt.isEmpty()) {
             return new ObjectResponse<>(404, Modulo.MISION.noEncontrado(), null);
         }
-
         Mision mision = misionOpt.get();
 
         if (request.getTitulo() != null) mision.setTitulo(request.getTitulo());
@@ -182,6 +176,18 @@ public class MisionServiceImpl
         if (request.getEstado() != null) mision.setEstado(request.getEstado());
         if (request.getFechaInicio() != null) mision.setFechaInicio(request.getFechaInicio());
         if (request.getFechaFin() != null) mision.setFechaFin(request.getFechaFin());
+        if(request.getIdDocenteInstitucion() != null){
+            Optional<DocenteInstitucion> docenteInstitucionOpt = docenteInstitucionRepo.buscarPorId(request.getIdDocenteInstitucion());
+            if (docenteInstitucionOpt.isEmpty()) {
+                return new ObjectResponse<>(404, Modulo.DOCENTE_INSTITUCION.noEncontrado(), null);
+            }
+            DocenteInstitucion docenteInstitucion = docenteInstitucionOpt.get();
+            Institucion institucion = mision.getInstitucion();
+            if(!institucion.equals(docenteInstitucion.getInstitucion())){
+                return new ObjectResponse<>(404, "El docente no pertenece a esta Institucion", null);
+            }
+            mision.setDocenteInstitucion(docenteInstitucion);
+        }
 
 
         Mision misionActualizada = misionRepo.save(mision);
