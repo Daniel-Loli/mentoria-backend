@@ -119,6 +119,7 @@ public class AsignacionServiceImpl
                 .alumnoInstitucion(alumnoInstitucionOpt.get())
                 .estado(EstadoAsignacionEnum.SOLICITADO)
                 .puntaje(0)
+                .isCompletado(false)
                 .isUpdate(false)
                 .build();
         asignacionRepo.save(asignacion);
