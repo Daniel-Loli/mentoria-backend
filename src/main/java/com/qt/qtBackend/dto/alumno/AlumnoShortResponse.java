@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AlumnoShortResponse {
     private Long idAlumno;
-    //private UsuarioShortResponse usuario;
     private String nombres;
     private String apellidos;
     private Boolean enabled;
