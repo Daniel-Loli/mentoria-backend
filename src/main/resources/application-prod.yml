@@ -1,0 +1,16 @@
+server:
+  port: ${SERVER_PORT}
+
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: ${PROD_DB_URL}
+    username: ${PROD_DB_USERNAME}
+    password: ${PROD_DB_PASSWORD}
+
+azure:
+  storage:
+    connection-string: ${AZURE_STORAGE_CONNECTION_STRING}
+    container:
+      academico: ${PROD_CONTAINER_ACAD}
+      evidencia: ${PROD_CONTAINER_EVID}

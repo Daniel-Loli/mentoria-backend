@@ -1,0 +1,22 @@
+application:
+  title: "QT"
+  version: "1.0.0"
+
+spring:
+  banner:
+    location: banner.txt
+  jpa:
+    database: sql_server
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.SQLServerDialect
+  profiles:
+    active: ${APP_ENV}
+
+external:
+  api:
+    chatbot-url: ${URL_CHAT_BOT}
+
+jwt:
+  secret: ${KEY_SECRET}

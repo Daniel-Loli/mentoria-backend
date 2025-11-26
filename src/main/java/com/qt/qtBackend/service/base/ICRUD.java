@@ -1,0 +1,10 @@
+package com.qt.qtBackend.service.base;
+
+import java.util.List;
+
+public interface ICRUD<T,ID> {
+    T save(T T) throws Exception;
+    T update(ID id,T T) throws Exception;
+    List<T> findAll() throws Exception;
+    T findById(ID id) throws Exception;
+}
