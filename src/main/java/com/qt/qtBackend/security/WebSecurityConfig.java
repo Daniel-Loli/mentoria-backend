@@ -59,8 +59,9 @@ public class WebSecurityConfig {
 
         // Orígenes permitidos (tu app Angular)
         configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:4200"
-        ));
+                "http://localhost:4200",
+                "http://localhost:3000"
+                ));
 
         // Métodos HTTP permitidos
         configuration.setAllowedMethods(Arrays.asList(
