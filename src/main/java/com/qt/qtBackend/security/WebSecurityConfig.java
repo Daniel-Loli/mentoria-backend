@@ -63,7 +63,8 @@ public class WebSecurityConfig {
                 "http://localhost:4200", // Angular local
                 "http://localhost:5173", // Vite
                 "http://localhost:5174",
-                "https://nice-wave-09360de0f.3.azurestaticapps.net" // 👈 Azure Static Web App
+                "https://nice-wave-09360de0f.3.azurestaticapps.net",
+                "https://frontendmentoria.netlify.app"
         ));
         // Métodos HTTP permitidos
         configuration.setAllowedMethods(Arrays.asList(
