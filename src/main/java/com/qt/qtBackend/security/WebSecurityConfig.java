@@ -60,13 +60,11 @@ public class WebSecurityConfig {
         // Orígenes permitidos (tu app Angular)
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:3000", // React CRA / Next.js
-                "http://localhost:4200", // Angular
-                "http://localhost:5173", // React/Vite
-                "http://localhost:5174", // Vite (a veces cambia uno más)
-                "http://127.0.0.1:3000", // React CRA usando localhost por IP
-                "http://127.0.0.1:5173"  // Vite usando IP
+                "http://localhost:4200", // Angular local
+                "http://localhost:5173", // Vite
+                "http://localhost:5174",
+                "https://nice-wave-09360de0f.3.azurestaticapps.net" // 👈 Azure Static Web App
         ));
-
         // Métodos HTTP permitidos
         configuration.setAllowedMethods(Arrays.asList(
                 "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"
